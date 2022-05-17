@@ -324,18 +324,34 @@ class GameState:
             return cell
        
        
-class Game():
+class Game(): #Class for the mechanics of the game
     def __init__(self):
         pass
     
         
         
 if __name__ == '__main__':
+    gs = GameState()
+    
+    #Add player names to current_players
+    print('How many players?')
+    player_count = int(input())
+    for i in range(0, player_count):
+        print(f"What is Player {i+1}'s name?")
+        gs.current_players.append(input())
+    
+    #Decide turn order
+    for i in range(0,100):
+        print(rand.randint(1,6))
+   
+
+
     # Game() Call the game class here
-    pass
+    
 
 
-test = GameState()
-print(test.board.head(), '\n')
 
-print(test.get_property_overview(1), '\n')
+    # test = GameState()
+    # print(test.board.head(), '\n')
+
+    # print(test.get_property_overview(1), '\n')
