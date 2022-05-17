@@ -20,7 +20,7 @@ class GameState:
         used_community_chest(list of strings): A list of community chest cards that have been used this game.
     """ 
     def __init__(self):
-        self.board = pd.read_csv(r"C:\Users\bman0\Documents\MonopolyBoard\board.csv")
+        self.board = pd.read_csv(r"board.csv")
         
         #List of players currently in the game and a list of current players who lost
         self.current_players = []
