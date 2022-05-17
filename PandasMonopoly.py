@@ -341,8 +341,7 @@ if __name__ == '__main__':
         gs.current_players.append(input())
     
     #Decide turn order
-    for i in range(0,100):
-        print(rand.randint(1,6))
+    # add "save game for later" function. games saves data to the csv
    
 
 
