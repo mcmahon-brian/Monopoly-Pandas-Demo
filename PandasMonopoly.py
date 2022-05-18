@@ -329,8 +329,6 @@ class Game(): #Class for the mechanics of the game
     def __init__(self, player):
         self.player = player
         self.gs = GameState()
-        # self.space_types = [{'space':[5,15,25,35], 'type_name' : 'RailRoad'}, {'space':[12,18], 'type_name' : 'Utilities'},
-        #                     {'space':[4], 'type_name' : 'IncomeTax'}, {'space':[38], 'type_name' : 'LuxuryTax'}] #Realized this isnt good
         
         
         
@@ -344,13 +342,10 @@ class Game(): #Class for the mechanics of the game
     def turn(self):
         roll = rand.randint(1,6)
         print(f"{self.player['name']} rolled a {roll}.") #print the roll
-        self.player['position'] += roll #adds roll to player info
+        self.player['position'] += roll #adds roll to player's info
         print(f"{self.player['name']} landed on {gs.get_cell(self.player['position'], 'SpaceName')}.") #Prints space landed
         print(f"\n{gs.get_property_overview(self.player['position'])}\n")#prints the card
         
-        # for type in self.space_types:  #Redoing this below
-        #     if int(self.player['position']) in type['space']:
-        #         if type['type_name'] == 
     
         if int(self.player['position']) in [5,15,25,35]:#Railroad
             pass
