@@ -69,13 +69,13 @@ class GameState:
         """
         if space_number in [12, 28]:#Utilities
             return f"{self.get_cell(space_number, 'SpaceName')}\nIf one \"Utilitiy\" is owned rent is 4 times amount shown on "\
-                "dice.\nIf both \"Utilities\" are owned rent is 10 times amount shown on dice.\nMortgage Value: $75\nCurrent "\
-                    "Owner: {self.get_owner(space_number)}"
+                f"dice.\nIf both \"Utilities\" are owned rent is 10 times amount shown on dice.\nMortgage Value: $75\nCurrent "\
+                    f"Owner: {self.get_owner(space_number)}"
         elif space_number in [5,15,25,35]:#Railroad
             return f"{self.get_cell(space_number, 'SpaceName')}\nRent: $25\nIf 2 Railroads are owned: $50\nIf 3 Railroads are owned: "\
-                        "$100\nIf 4 Railroads are owned: $200\nMortgage Value: $100\nCurrent Owner: {self.get_owner(space_number)}"
+                        f"$100\nIf 4 Railroads are owned: $200\nMortgage Value: $100\nCurrent Owner: {self.get_owner(space_number)}"
         elif space_number in [4, 38]:#Fees
-            return f"{self.get_cell(space_number, 'SpaceName')}\nPay ${self.get_fee(space_number)}"
+            return f"{self.get_cell(space_number, 'SpaceName')}\nPay ${self.get_cell(space_number, 'Fee')}"
         elif self.checker(self.get_cell(space_number, "Price")) == "NaN":#Every other space
             return f"{self.get_cell(space_number, 'SpaceName')}"
         else:#Properties
@@ -329,8 +329,14 @@ class Game(): #Class for the mechanics of the game
     def __init__(self, player):
         self.player = player
         self.gs = GameState()
-        self.turn()
+        # self.space_types = [{'space':[5,15,25,35], 'type_name' : 'RailRoad'}, {'space':[12,18], 'type_name' : 'Utilities'},
+        #                     {'space':[4], 'type_name' : 'IncomeTax'}, {'space':[38], 'type_name' : 'LuxuryTax'}] #Realized this isnt good
         
+        
+        
+        
+        self.turn()
+    
     
     def roll_dice():
         return rand.randint(1,6)
@@ -341,6 +347,24 @@ class Game(): #Class for the mechanics of the game
         self.player['position'] += roll #adds roll to player info
         print(f"{self.player['name']} landed on {gs.get_cell(self.player['position'], 'SpaceName')}.") #Prints space landed
         print(f"\n{gs.get_property_overview(self.player['position'])}\n")#prints the card
+        
+        # for type in self.space_types:  #Redoing this below
+        #     if int(self.player['position']) in type['space']:
+        #         if type['type_name'] == 
+    
+        if int(self.player['position']) in [5,15,25,35]:#Railroad
+            pass
+        elif int(self.player['position']) in [12, 28]:#Utilities
+            pass
+        elif int(self.player['position']) == 4: #Income Tax
+            pass
+        elif int(self.player['position']) == 38: #Luxury Tax
+            pass
+        else: #Properties
+            pass
+            
+        
+        
 
         
 if __name__ == '__main__':
