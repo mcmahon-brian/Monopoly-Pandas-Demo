@@ -354,9 +354,11 @@ class Game(): #Class for the mechanics of the game
         elif int(self.player['position']) == 4: #Income Tax
             self.player['money'] -= 200
         elif int(self.player['position']) == 38: #Luxury Tax
-            pass
+            self.player['money'] -= 100
         else: #Properties
             pass
+        
+        
             
         
         
@@ -387,3 +389,6 @@ if __name__ == '__main__':
     # print(test.board.head(), '\n')
 
     # print(test.get_property_overview(1), '\n')
+
+
+#ADD RULE BOOK AND SHOW OFF REGEX FOR FINDING SPECIFIC INSTRUCTIONS IN THE DOC
