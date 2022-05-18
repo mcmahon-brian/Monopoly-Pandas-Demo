@@ -1,5 +1,6 @@
 import random as rand
 from math import isnan
+from turtle import position
 import pandas as pd
 from argparse import ArgumentParser
 import sys
@@ -325,10 +326,22 @@ class GameState:
        
        
 class Game(): #Class for the mechanics of the game
-    def __init__(self):
-        pass
-    
+    def __init__(self, player):
+        self.player = player
+        self.gs = GameState()
+        self.turn()
         
+    
+    def roll_dice():
+        return rand.randint(1,6)
+    
+    def turn(self):
+        roll = rand.randint(1,6)
+        print(f"{self.player['name']} rolled a {roll}.") #print the roll
+        self.player['position'] += roll #adds roll to player info
+        print(f"{self.player['name']} landed on {gs.get_cell(self.player['position'], 'SpaceName')}.") #Prints space landed
+        print(f"\n{gs.get_property_overview(self.player['position'])}\n")#prints the card
+
         
 if __name__ == '__main__':
     gs = GameState()
@@ -338,12 +351,13 @@ if __name__ == '__main__':
     player_count = int(input())
     for i in range(0, player_count):
         print(f"What is Player {i+1}'s name?")
-        gs.current_players.append(input())
+        gs.current_players.append({'name':input(), 'position':0})
     
-    #Decide turn order
+    #Decide turn order, goes in order for now    
     # add "save game for later" function. games saves data to the csv
-   
-
+    
+    for player in gs.current_players:
+        Game(player)
 
     # Game() Call the game class here
     
