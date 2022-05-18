@@ -336,13 +336,13 @@ class Game(): #Class for the mechanics of the game
         self.turn()
     
     
-    def roll_dice():
-        return rand.randint(1,6)
+
     
     def turn(self):
         roll = rand.randint(1,6)
+        #ADD OPTION TO ROLL OWN PHYSICAL DICE
         print(f"{self.player['name']} rolled a {roll}.") #print the roll
-        self.player['position'] += roll #adds roll to player's info
+        self.player['position'] += 4 #adds roll to player's info
         print(f"{self.player['name']} landed on {gs.get_cell(self.player['position'], 'SpaceName')}.") #Prints space landed
         print(f"\n{gs.get_property_overview(self.player['position'])}\n")#prints the card
         
@@ -352,7 +352,7 @@ class Game(): #Class for the mechanics of the game
         elif int(self.player['position']) in [12, 28]:#Utilities
             pass
         elif int(self.player['position']) == 4: #Income Tax
-            pass
+            self.player['money'] -= 200
         elif int(self.player['position']) == 38: #Luxury Tax
             pass
         else: #Properties
@@ -370,7 +370,7 @@ if __name__ == '__main__':
     player_count = int(input())
     for i in range(0, player_count):
         print(f"What is Player {i+1}'s name?")
-        gs.current_players.append({'name':input(), 'position':0})
+        gs.current_players.append({'name':input(), 'position':0, 'money':1500})
     
     #Decide turn order, goes in order for now    
     # add "save game for later" function. games saves data to the csv
