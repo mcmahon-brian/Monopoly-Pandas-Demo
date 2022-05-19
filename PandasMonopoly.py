@@ -5,6 +5,8 @@ import pandas as pd
 from argparse import ArgumentParser
 import sys
 
+from pyrsistent import v
+
 class GameState:
     """Written by Brian McMahon.
     A class that represents the Monopoly board, property cards, and chance/community chest cards. 
@@ -191,7 +193,7 @@ class GameState:
         else:
             return int(dex)
         
-    def get_owner(self, space_number):
+    def get_owner(self, space_number): #get_cell does this
         """Written by Brian McMahon.
         Fetches name of the owner of the property at space_number.
         
@@ -327,7 +329,7 @@ class GameState:
        
 class Game(): #Class for the mechanics of the game
     def __init__(self, player):
-        self.player = player
+        self.player = player #[name, position, money]
         self.gs = GameState()
         
         
@@ -342,9 +344,9 @@ class Game(): #Class for the mechanics of the game
         roll = rand.randint(1,6)
         #ADD OPTION TO ROLL OWN PHYSICAL DICE
         print(f"{self.player['name']} rolled a {roll}.") #print the roll
-        self.player['position'] += 4 #adds roll to player's info
-        print(f"{self.player['name']} landed on {gs.get_cell(self.player['position'], 'SpaceName')}.") #Prints space landed
-        print(f"\n{gs.get_property_overview(self.player['position'])}\n")#prints the card
+        self.player['position'] += roll #adds roll to player's info
+        print(f"{self.player['name']} landed on {self.gs.get_cell(self.player['position'], 'SpaceName')}.") #Prints space landed
+        print(f"\n{self.gs.get_property_overview(self.player['position'])}\n")#prints the card
         
     
         if int(self.player['position']) in [5,15,25,35]:#Railroad
@@ -356,11 +358,16 @@ class Game(): #Class for the mechanics of the game
         elif int(self.player['position']) == 38: #Luxury Tax
             self.player['money'] -= 100
         else: #Properties
-            pass
-        
-        
-            
-        
+            if self.gs.get_cell(self.player['position'], 'Owner') == 'bank':
+                print('Property is unowned, would you like to buy it? y or n')
+                buy = input().lower()
+                if buy == 'y':
+                    self.player['money'] -= self.gs.get_cell(self.player['position'], 'Price') #Paying for property
+                    self.gs.change_owner(self.player['position'], self.player['name']) #Changing owner name in df
+            else:
+                owner = self.gs.get_cell(self.player['position'], 'Owner')
+                print(f"This property is owned by {owner}, you paid {self.gs.get_cell(self.player['position'], 'Rent')} in rent.")
+                
         
 
         
