@@ -342,7 +342,7 @@ class Game(): #Class for the mechanics of the game
     
     def turn(self):
         roll = rand.randint(1,6)
-        #ADD OPTION TO ROLL OWN PHYSICAL DICE
+        #ADD OPTION TO ROLL OWN PHYSICAL DICE?
         print(f"{self.player['name']} rolled a {roll}.") #print the roll
         self.player['position'] += roll #adds roll to player's info
         print(f"{self.player['name']} landed on {self.gs.get_cell(self.player['position'], 'SpaceName')}.") #Prints space landed
@@ -358,23 +358,27 @@ class Game(): #Class for the mechanics of the game
         elif int(self.player['position']) == 38: #Luxury Tax
             self.player['money'] -= 100
         else: #Properties
-            if self.gs.get_cell(self.player['position'], 'Owner') == 'bank':
+            if self.gs.get_cell(self.player['position'], 'Owner') == 'bank': #if no one owns the property
                 print('Property is unowned, would you like to buy it? y or n')
                 buy = input().lower()
                 if buy == 'y':
                     self.player['money'] -= self.gs.get_cell(self.player['position'], 'Price') #Paying for property
                     self.gs.change_owner(self.player['position'], self.player['name']) #Changing owner name in df
-            else:
+            else:#if someone owns the property
                 owner = self.gs.get_cell(self.player['position'], 'Owner')
                 print(f"This property is owned by {owner}, you paid {self.gs.get_cell(self.player['position'], 'Rent')} in rent.")
+                #ADD AND SUBTRACT THE MONEY FROM PAYER AND OWNER
+                #MIGHT NEED TO STORE OBJs IN A STRING???
                 
-        
+def rules(): #Function for searching through the rule book
+    pass #ADD REGEX FOR FINDING SPECIFIC RULES
+    
 
         
 if __name__ == '__main__':
     gs = GameState()
     
-    #Add player names to current_players
+    #Adds player names to current_players
     print('How many players?')
     player_count = int(input())
     for i in range(0, player_count):
