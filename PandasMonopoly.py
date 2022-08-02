@@ -393,7 +393,7 @@ if __name__ == '__main__':
         for player in gs.current_players:
             Game(player)
             print("Another turn? y or n")
-            temp_turn = input().lower()
+        temp_turn = input().lower()
 
     # Game() Call the game class here
     
