@@ -367,8 +367,17 @@ class Game(): #Class for the mechanics of the game
             else:#if someone owns the property
                 owner = self.gs.get_cell(self.player['position'], 'Owner')
                 print(f"This property is owned by {owner}, you paid {self.gs.get_cell(self.player['position'], 'Rent')} in rent.")
-                #ADD AND SUBTRACT THE MONEY FROM PAYER AND OWNER
-                #MIGHT NEED TO STORE OBJs IN A STRING???
+                transaction(owner, ) #FINISH CALLING THE TRANSACTION FUNCTION
+
+    
+    
+    def transaction(self, owner, payer, amount): #Handles money transactions between players
+        for player in self.gs.current_players:
+            if player['name'] == owner:
+                player['money'] += amount
+            if player['name'] == payer:
+                player['money'] -= amount
+                        
         
                 
 def rules(): #Function for searching through the rule book
@@ -406,4 +415,6 @@ if __name__ == '__main__':
     # print(test.get_property_overview(1), '\n')
 
 
+#TO DO: 
+#line 370   
 #ADD RULE BOOK AND SHOW OFF REGEX FOR FINDING SPECIFIC INSTRUCTIONS IN THE DOC
