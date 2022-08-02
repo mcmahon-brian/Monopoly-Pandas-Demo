@@ -369,6 +369,7 @@ class Game(): #Class for the mechanics of the game
                 print(f"This property is owned by {owner}, you paid {self.gs.get_cell(self.player['position'], 'Rent')} in rent.")
                 #ADD AND SUBTRACT THE MONEY FROM PAYER AND OWNER
                 #MIGHT NEED TO STORE OBJs IN A STRING???
+        
                 
 def rules(): #Function for searching through the rule book
     pass #ADD REGEX FOR FINDING SPECIFIC RULES
@@ -387,9 +388,12 @@ if __name__ == '__main__':
     
     #Decide turn order, goes in order for now    
     # add "save game for later" function. games saves data to the csv
-    
-    for player in gs.current_players:
-        Game(player)
+    temp_turn = 'y'
+    while(temp_turn == 'y'):
+        for player in gs.current_players:
+            Game(player)
+            print("Another turn? y or n")
+            temp_turn = input().lower()
 
     # Game() Call the game class here
     
